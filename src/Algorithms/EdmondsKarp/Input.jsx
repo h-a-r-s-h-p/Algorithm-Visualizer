@@ -1,25 +1,30 @@
 import React, { Component } from 'react'
 import "./Input.css"
+import PlotGraph from '../PlotGraph/PlotGraph';
 
-export default class EdmondsKarp extends Component {
+export default class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: ""
     };
+    console.log("inside constructor\n");
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  print(){
+    console.log("The function inside any class component is auto called")
   }
 
   handleChange(event) {
     this.setState({ data: event.target.value });
   }
 
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.data);
-    event.preventDefault();
-  }
+  // handleSubmit(event) {
+  //   this.props.his
+  // }
 
   render() {
     return (
@@ -40,7 +45,7 @@ export default class EdmondsKarp extends Component {
         <div className="graphInput">
           <form onSubmit={this.handleSubmit}>
             <textarea value={this.state.data} onChange={this.handleChange} />
-            <button class="btn btn-success" type="submit">Submit</button>
+            <button className="btn btn-success" type="submit">Submit</button>
           </form>
         </div>
       </>

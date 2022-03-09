@@ -1,41 +1,38 @@
-import React, { Component } from 'react';
-import { Route, withRouter } from "react-router-dom";
+import React from 'react';
+import { Route, Routes, useNavigate} from "react-router-dom";
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Home from "./Algorithms/Home"
-import EdmondsKarp from "./Algorithms/EdmondsKarp/Input"
+import Input from "./Algorithms/EdmondsKarp/Input"
 import FordFulkerson from "./Algorithms/FordFulkerson/FordFulkerson"
 import "./App.css"
 
-class DropDown extends Component {
-    onChange = (e) => {
-        this.props.history.push(`${e.target.value}`)
-    }
 
-    render = () => {
-        return (
-            <div className="drop-down" >
-                <select id="options" onChange={this.onChange}>
-                    <option value="/"  > Home</option>
-                    <option value="edmondskarp"> Edmond's Karp </option>
-                    <option value="fordfulkerson" > Ford Fulkerson </option>
-                </select>
-            </div>
-        );
-    }
+function DropDown() {
+    var navigate = useNavigate();                                      // Any keyword which starts with "use" is a hook and hooks can only be used inside a functional component
+    return (
+        <div className="drop-down" >
+            <select id="algorithm" onChange={(e)=>{navigate(e.target.value)}} >
+                <option value="/"  > Home</option>
+                <option value="edmondskarp/input"> Edmond's Karp </option>
+                <option value="fordfulkerson/input" > Ford Fulkerson </option>
+            </select>
+        </div>
+    );
 
 }
 
-const Menu = withRouter(DropDown);
 
 function App() {
     return (
         <BrowserRouter>
             <div>
-                <Menu />
-                <Route exact path="/" render={() => <Home />} />
-                <Route exact path="/edmondskarp" render={() => <EdmondsKarp />} />
-                <Route exact path="/fordfulkerson" render={() => <FordFulkerson />} />
+                <DropDown />
+                <Routes>                                            {/* Routes is wrapped because everything outside routes will be present in every component */}
+                <Route exact path="/" element={<Home/>} />
+                <Route exact path="/edmondskarp/input" element={ <Input />} />
+                <Route exact path="/fordfulkerson/input" element={<FordFulkerson />} />
+                </Routes>
             </div>
         </BrowserRouter>
     )

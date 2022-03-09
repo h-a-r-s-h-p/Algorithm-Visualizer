@@ -4,5 +4,9 @@
 
 .graphInput{
     text-align: center;
+}
 
+textarea{
+    width: 150px;
+    height: 300px;
 }
