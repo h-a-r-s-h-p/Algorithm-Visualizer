@@ -6,6 +6,7 @@ import Home from "./Algorithms/Home"
 import Input from "./Algorithms/EdmondsKarp/Input"
 import FordFulkerson from "./Algorithms/FordFulkerson/FordFulkerson"
 import "./App.css"
+import PlotGraph from './Algorithms/PlotGraph/PlotGraph';
 
 
 function DropDown() {
