@@ -42,6 +42,9 @@ export default class GraphInput extends Component {
   render() {
     return (
         <div className="inputGraph">
+          <p> <b> Please provide the number of vertices, number of edges in the respective entries </b></p>
+          <p> <b> To provide edges, provide tails of all edges in "Starting Vertices" entry, and heads of all edges in "Ending Vertices" entry, separated by space </b> </p> 
+          <p> <b> In the weights entry, provide space separated weights corresponding to the edges you entered </b> </p>
           <form onSubmit={this.handleSubmit}>
             <input type="text"
                 name="vertexCount"
