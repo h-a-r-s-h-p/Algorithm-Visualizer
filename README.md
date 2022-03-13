@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Error while deploying
+I was getting heap allocation out of memory error, to resolve it, I changed my start and build script to the following:
+"start": "react-scripts --max_old_space_size=4096 start",
+"build": "react-scripts --max_old_space_size=4096 build",
