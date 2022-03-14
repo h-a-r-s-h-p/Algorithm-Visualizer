@@ -29,7 +29,7 @@ export default function PlotGraph(props) {
   }
 
   var edges = new Array();
-  for(var i =0; i<edgeCount;i++){
+  for( i =0; i<edgeCount;i++){
     edges[i]={
       from: startingVertices[i],
       to: endingVertices[i],

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import "./Input.css"
+import "./EdmondsKarp.css"
 import PlotGraph from '../PlotGraph/PlotGraph';
-import { Link, Navigate } from 'react-router-dom';
 import GraphInput from '../GraphInput/GraphInput';
 
-export default class Input extends Component {
+export default class EdmondsKarp extends Component {
   constructor(props) {
     super(props);
     this.state = {

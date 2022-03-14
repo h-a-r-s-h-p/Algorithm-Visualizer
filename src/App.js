@@ -3,10 +3,9 @@ import { Route, Routes, useNavigate} from "react-router-dom";
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Home from "./Algorithms/Home"
-import Input from "./Algorithms/EdmondsKarp/Input"
+import EdmondsKarp from "./Algorithms/EdmondsKarp/EdmondsKarp"
 import FordFulkerson from "./Algorithms/FordFulkerson/FordFulkerson"
 import "./App.css"
-import PlotGraph from './Algorithms/PlotGraph/PlotGraph';
 
 
 function DropDown() {
@@ -15,8 +14,8 @@ function DropDown() {
         <div className="drop-down" >
             <select id="algorithm" onChange={(e)=>{navigate(e.target.value)}} >
                 <option value="/"  > Home</option>
-                <option value="edmondskarp/input"> Edmond's Karp </option>
-                <option value="fordfulkerson/input" > Ford Fulkerson </option>
+                <option value="edmondskarp/visualize"> Edmond's Karp </option>
+                <option value="fordfulkerson/visualize" > Ford Fulkerson </option>
             </select>
         </div>
     );
@@ -31,8 +30,8 @@ function App() {
                 <DropDown />
                 <Routes>                                            {/* Routes is wrapped because everything outside routes will be present in every component */}
                 <Route exact path="/" element={<Home/>} />
-                <Route exact path="/edmondskarp/input" element={ <Input />} />
-                <Route exact path="/fordfulkerson/input" element={<FordFulkerson />} />
+                <Route exact path="/edmondskarp/visualize" element={ <EdmondsKarp />} />
+                <Route exact path="/fordfulkerson/visualize" element={<FordFulkerson />} />
                 </Routes>
             </div>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../logo.svg"
+import logo from "../IITPkd.png"
 
 function Home() {
   console.log("Home component called");
@@ -8,8 +8,8 @@ function Home() {
       <h1 style={{ textAlign: 'center' }}>
         Select your algorithm
       </h1>
-      <div style={{ textAlign: 'center' }}>
-        <img src= {logo} alt = "logo" style = {{height:'600px'}} />
+      <div style={{textAlign: 'center'}}>
+        <img src= {logo} alt = "logo" style = {{height:'300px'}} />
       </div>
     </div>
   )
