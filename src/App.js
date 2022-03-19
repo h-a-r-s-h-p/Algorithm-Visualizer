@@ -34,6 +34,7 @@ function App() {
                 <Route exact path="/fordfulkerson/visualize" element={<FordFulkerson />} />
                 </Routes>
             </div>
+            <footer> @author Harsh Parihar</footer>
         </BrowserRouter>
     )
 }

@@ -1,0 +1,12 @@
+.instructions{
+    text-align: center;
+}
+
+.graphInput{
+    text-align: center;
+}
+
+textarea{
+    width: 150px;
+    height: 300px;
+}

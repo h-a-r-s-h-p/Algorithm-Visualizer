@@ -9,3 +9,13 @@
     background-color:white;
     height: 40px;
 }
+
+footer{
+    background-color:firebrick;
+  text-align: center;
+  padding: 5x;
+  color: white;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: medium;
+  margin-top: 30px;
+}
