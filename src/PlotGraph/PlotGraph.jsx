@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react'
-import { DataSet, Network} from 'vis-network/standalone/esm/vis-network';
+import React, { useEffect, useRef } from 'react'
+import { DataSet, Network } from 'vis-network/standalone/esm/vis-network';
 import "./PlotGraph.css"
 
 export default function PlotGraph(props) {
@@ -10,7 +10,7 @@ export default function PlotGraph(props) {
 
   var vertexCount = props.graph.vertexCount;
   vertexCount = parseInt(vertexCount);
-  console.log("type of vertexCount is : "+ typeof vertexCount)
+  console.log("type of vertexCount is : " + typeof vertexCount)
   var edgeCount = props.graph.edgeCount;
   edgeCount = parseInt(edgeCount)
 
@@ -21,16 +21,16 @@ export default function PlotGraph(props) {
   var weights = props.graph.weights.split(" ");
 
   var nodesArray = new Array();
-  for(var i=0 ; i<vertexCount;i++){
-    nodesArray[i]={
+  for (var i = 0; i < vertexCount; i++) {
+    nodesArray[i] = {
       id: i,
       label: i.toString(),
     }
   }
 
   var edges = new Array();
-  for( i =0; i<edgeCount;i++){
-    edges[i]={
+  for (i = 0; i < edgeCount; i++) {
+    edges[i] = {
       from: startingVertices[i],
       to: endingVertices[i],
       arrows: {
@@ -40,7 +40,7 @@ export default function PlotGraph(props) {
         },
       },
       label: weights[i],
-      font:{
+      font: {
         align: "top"
       }
     };
@@ -54,16 +54,16 @@ export default function PlotGraph(props) {
     edges
   };
 
-  const options ={}
+  const options = {}
 
   useEffect(
     () => {
       network.current = new Network(domNode.current, data, options);
     },
-    [domNode, network, data, options ]
+    [domNode, network, data, options]
   );
 
   return (
-    <div className="thegraph" ref = {domNode} />
+    <div className="thegraph" ref={domNode}></div>
   );
 };

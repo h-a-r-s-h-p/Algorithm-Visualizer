@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import "./FordFulkerson.css"
-import PlotGraph from '../PlotGraph/PlotGraph';
-import GraphInput from '../GraphInput/GraphInput';
+import PlotGraph from '../../PlotGraph/PlotGraph';
+import GraphInput from '../../GraphInput/GraphInput';
 
 export default class FordFulkerson extends Component {
   constructor(props) {

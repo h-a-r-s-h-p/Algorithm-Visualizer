@@ -6,7 +6,48 @@
     text-align: center;
 }
 
-textarea{
-    width: 150px;
-    height: 300px;
+.visual{
+    width: 900px;
+}
+
+.container {
+    display: flex;
+}
+
+.pseudocode{
+margin-right: auto;
+}
+
+.buttonstart{
+    background-color:rgb(224, 130, 96);
+    border-radius: 12px;
+    width: 300px;
+    height:40px;
+    color: white;
+}
+
+.buttonresume{
+    background-color: green;
+    border-radius: 20%;
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+    color: white;
+}
+.buttonpause{
+    background-color: red;
+    border-radius: 20%;
+    margin-left: 50px;
+    width: 100px;
+    height: 30px;
+    color: white;
+}
+
+.buttonreset{
+    background-color: black;
+    color: white;
+    border-radius: 20%;
+    margin-left: 50px;
+    width: 100px;
+    height: 30px;
 }
