@@ -10,6 +10,8 @@ export default class GraphInput extends Component {
       startingVertices: null,
       endingVertices: null,
       weights:null,
+      source: null,
+      sink: null
     };
     console.log("inside constructor\n");
 
@@ -34,6 +36,8 @@ export default class GraphInput extends Component {
                     this.state.startingVertices,
                     this.state.endingVertices,
                     this.state.weights,
+                    this.state.source,
+                    this.state.sink,
                     true);
     // return (<PlotGraph value={this.state.data} />);
 
@@ -45,6 +49,7 @@ export default class GraphInput extends Component {
           <p> <b> Please provide the number of vertices, number of edges in the respective entries </b></p>
           <p> <b> To provide edges, provide tails of all edges in "Starting Vertices" entry, and heads of all edges in "Ending Vertices" entry, separated by space </b> </p> 
           <p> <b> In the weights entry, provide space separated weights corresponding to the edges you entered </b> </p>
+          <p> <b> Finally provide the source and sink</b></p>
           <form onSubmit={this.handleSubmit}>
             <input type="text"
                 name="vertexCount"
@@ -74,6 +79,18 @@ export default class GraphInput extends Component {
                 name="weights"
                 placeholder="weights"
                 value={this.state.weights}
+                onChange={this.handleChange}
+            />
+            <input type="text"
+                name="source"
+                placeholder="source"
+                value={this.state.source}
+                onChange={this.handleChange}
+            />
+            <input type="text"
+                name="sink"
+                placeholder="sink"
+                value={this.state.sink}
                 onChange={this.handleChange}
             />
             <button className="btn btn-success" >Submit </button>

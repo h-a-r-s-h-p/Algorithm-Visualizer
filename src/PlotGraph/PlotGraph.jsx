@@ -19,6 +19,8 @@ export default function PlotGraph(props) {
   var endingVertices = props.graph.endingVertices.split(" ");
 
   var weights = props.graph.weights.split(" ");
+  var source = parseInt(props.graph.source);
+  var sink = parseInt(props.graph.sink);
 
   var nodesArray = new Array();
   for (var i = 0; i < vertexCount; i++) {
@@ -29,17 +31,18 @@ export default function PlotGraph(props) {
   }
 
   var edges = new Array();
-  for (i = 0; i < edgeCount; i++) {
-    edges[i] = {
-      from: startingVertices[i],
-      to: endingVertices[i],
+  for (var j = 0; j < edgeCount; j++) {
+    edges[j] = {
+      id: i++,
+      from: startingVertices[j],
+      to: endingVertices[j],
       arrows: {
         to: {
           enabled: true,
           type: "arrow",
         },
       },
-      label: weights[i],
+      label: weights[j],
       font: {
         align: "top"
       }
@@ -55,6 +58,18 @@ export default function PlotGraph(props) {
   };
 
   const options = {}
+
+  var sourceNode = nodes.get(source);
+  sourceNode.color = {
+    background: 'green'
+  }
+
+  var sinkNode = nodes.get(sink);
+  sinkNode.color={
+    background: 'red'
+  }
+  nodes.update(sourceNode);
+  nodes.update(sinkNode);
 
   useEffect(
     () => {

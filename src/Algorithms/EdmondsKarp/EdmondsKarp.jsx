@@ -14,6 +14,8 @@ export default class EdmondsKarp extends Component {
       startingVertices: null,
       endingVertices: null,
       weights: null,
+      source: null,
+      sink: null,
       isClicked: false
     };
     console.log("inside constructor\n");
@@ -21,7 +23,7 @@ export default class EdmondsKarp extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(vertexCount, edgeCount, startingVertices, endingVertices, weights, isClicked) {
+  handleChange(vertexCount, edgeCount, startingVertices, endingVertices, weights, source, sink, isClicked) {
     this.setState(prevState => {
       return {
         vertexCount: vertexCount,
@@ -29,6 +31,8 @@ export default class EdmondsKarp extends Component {
         startingVertices: startingVertices,
         endingVertices: endingVertices,
         weights: weights,
+        source: source,
+        sink: sink,
         isClicked: isClicked
       }
     })
