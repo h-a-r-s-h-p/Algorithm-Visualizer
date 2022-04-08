@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import "./EdmondsKarp.css"
-import PlotGraph from '../../PlotGraph/PlotGraph';
-import GraphInput from '../../GraphInput/GraphInput';
-import EdmondsKarpPseudo from '../../PseudoCode/EdmondsKarpPseudo';
-import EdmondsKarpVisualize from '../../Visualize/EdmondsKarpVisualize';
+import "./VisualPage.css"
+import PlotGraph from '../PlotGraph/PlotGraph';
+import GraphInput from '../GraphInput/GraphInput';
+import EdmondsKarpPseudo from '../PseudoCode/EdmondsKarpPseudo';
+import HandleActions from '../Actions/HandleActions'
 
 export default class EdmondsKarp extends Component {
   constructor(props) {
@@ -41,6 +41,7 @@ export default class EdmondsKarp extends Component {
   render() {
     return (
       <>
+        <h1>{this.props.algorithm}</h1>
         <GraphInput func={this.handleChange} />
         <div className="container">
           <div className="visual">
