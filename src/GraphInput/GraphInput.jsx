@@ -31,13 +31,20 @@ export default class GraphInput extends Component {
     // alert("The graph entered is : "+ this.state.data);
     console.log("the graph component should be called");
     event.preventDefault();
-    this.props.func(this.state.vertexCount,
-                    this.state.edgeCount,
-                    this.state.startingVertices,
-                    this.state.endingVertices,
-                    this.state.weights,
-                    this.state.source,
-                    this.state.sink,
+    var vertexCount = parseInt(this.state.vertexCount);
+    var edgeCount = parseInt(this.state.edgeCount);
+    var startingVertices = this.state.startingVertices.split(" ");
+    var endingVertices = this.state.endingVertices.split(" ");
+    var weights = this.state.weights.split(" ");
+    var source = parseInt(this.state.source);
+    var sink = parseInt(this.state.sink);
+    this.props.func(vertexCount,
+                    edgeCount,
+                    startingVertices,
+                    endingVertices,
+                    weights,
+                    source,
+                    sink,
                     true);
     // return (<PlotGraph value={this.state.data} />);
 

@@ -51,7 +51,13 @@ export default class EdmondsKarp extends Component {
                       <div>
                         <PlotGraph graph = {this.state}/>  
                         <div className="control-bar">
-                          <button className="buttonstart"  >Start Visualization</button><br />
+                          <button className="buttonstart"  onClick={HandleActions(this.state.vertexCount, 
+                                                                                  this.state.edgeCount, 
+                                                                                  this.state.startingVertices, 
+                                                                                  this.state.endingVertices,
+                                                                                  this.state.weights,
+                                                                                  this.state.source,
+                                                                                  this.state.sink)} >Start Visualization</button><br />
                           <button className="buttonresume" >Resume</button>
                           <button className="buttonpause" >Pause</button>
                           <button className="buttonreset" >Reset</button>

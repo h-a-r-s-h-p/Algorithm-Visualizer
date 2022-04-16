@@ -9,20 +9,17 @@ export default function PlotGraph(props) {
   const network = useRef(null);
 
   var vertexCount = props.graph.vertexCount;
-  vertexCount = parseInt(vertexCount);
-  console.log("type of vertexCount is : " + typeof vertexCount)
   var edgeCount = props.graph.edgeCount;
-  edgeCount = parseInt(edgeCount)
+  console.log("type of vertexCount = "+ typeof vertexCount);
+  var startingVertices = props.graph.startingVertices;
 
-  var startingVertices = props.graph.startingVertices.split(" ");
+  var endingVertices = props.graph.endingVertices;
 
-  var endingVertices = props.graph.endingVertices.split(" ");
+  var weights = props.graph.weights;
+  var source = props.graph.source;
+  var sink = props.graph.sink;
 
-  var weights = props.graph.weights.split(" ");
-  var source = parseInt(props.graph.source);
-  var sink = parseInt(props.graph.sink);
-
-  var nodesArray = new Array();
+  var nodesArray = [];
   for (var i = 0; i < vertexCount; i++) {
     nodesArray[i] = {
       id: i,
@@ -30,7 +27,7 @@ export default function PlotGraph(props) {
     }
   }
 
-  var edges = new Array();
+  var edges = [];
   for (var j = 0; j < edgeCount; j++) {
     edges[j] = {
       id: i++,
