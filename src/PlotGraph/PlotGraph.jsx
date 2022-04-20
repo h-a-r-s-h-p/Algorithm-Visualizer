@@ -7,17 +7,18 @@ export default function PlotGraph(props) {
   const domNode = useRef(null);
 
   const network = useRef(null);
+  const graph = props.plotGraphProps.graph;
 
-  var vertexCount = props.graph.vertexCount;
-  var edgeCount = props.graph.edgeCount;
-  console.log("type of vertexCount = "+ typeof vertexCount);
-  var startingVertices = props.graph.startingVertices;
+  var vertexCount = graph.vertexCount;
+  // console.log("vertexCount inside plotGraph = "+ vertexCount);
+  var edgeCount = graph.edgeCount;
+  var startingVertices = graph.startingVertices;
 
-  var endingVertices = props.graph.endingVertices;
+  var endingVertices = graph.endingVertices;
 
-  var weights = props.graph.weights;
-  var source = props.graph.source;
-  var sink = props.graph.sink;
+  var weights = graph.weights;
+  var source = graph.source;
+  var sink = graph.sink;
 
   var nodesArray = [];
   for (var i = 0; i < vertexCount; i++) {
@@ -39,11 +40,36 @@ export default function PlotGraph(props) {
           type: "arrow",
         },
       },
-      label: weights[j],
+      label: "0/"+weights[j],
       font: {
         align: "top"
       }
     };
+  }
+
+  for(var k=0; k<edgeCount; k++){
+    edges[j++] = {
+      id : i++,
+      from: endingVertices[k],
+      to: startingVertices[k],
+      arrows:{
+        to:{
+          enabled: true,
+          type: "arrow",
+        },
+      },
+      label: "0/0",
+      font:{
+        align: "top"
+      },
+      hidden: props.plotGraphProps.reverseEdgesHidden,
+      color: "black",
+      group : "reverse"
+    }
+  }
+
+  if(props.plotGraphProps.reverseEdgesHidden===false){
+    console.log(`The reverse edges should also be plotted`)
   }
 
   var nodes = new DataSet(nodesArray);
@@ -74,6 +100,7 @@ export default function PlotGraph(props) {
     },
     [domNode, network, data, options]
   );
+
 
   return (
     <div className="thegraph" ref={domNode}></div>

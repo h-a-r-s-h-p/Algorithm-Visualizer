@@ -13,7 +13,7 @@ export default class GraphInput extends Component {
       source: null,
       sink: null
     };
-    console.log("inside constructor\n");
+    console.log("inside GraphInput constructor\n");
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,24 +28,24 @@ export default class GraphInput extends Component {
   }
 
   handleSubmit(event) {
-    // alert("The graph entered is : "+ this.state.data);
-    console.log("the graph component should be called");
     event.preventDefault();
-    var vertexCount = parseInt(this.state.vertexCount);
-    var edgeCount = parseInt(this.state.edgeCount);
-    var startingVertices = this.state.startingVertices.split(" ");
-    var endingVertices = this.state.endingVertices.split(" ");
-    var weights = this.state.weights.split(" ");
-    var source = parseInt(this.state.source);
-    var sink = parseInt(this.state.sink);
-    this.props.func(vertexCount,
-                    edgeCount,
-                    startingVertices,
-                    endingVertices,
-                    weights,
-                    source,
-                    sink,
-                    true);
+    var simplifiedState={
+      vertexCount: null,
+      edgeCount:null,
+      startingVertices: null,
+      endingVertices: null,
+      weights:null,
+      source: null,
+      sink: null
+    }
+    simplifiedState.vertexCount = parseInt(this.state.vertexCount);
+    simplifiedState.edgeCount = parseInt(this.state.edgeCount);
+    simplifiedState.startingVertices = this.state.startingVertices.split(" ");
+    simplifiedState.endingVertices = this.state.endingVertices.split(" ");
+    simplifiedState.weights = this.state.weights.split(" ");
+    simplifiedState.source = parseInt(this.state.source);
+    simplifiedState.sink = parseInt(this.state.sink);
+    this.props.func(simplifiedState, true);
     // return (<PlotGraph value={this.state.data} />);
 
   }
@@ -57,6 +57,7 @@ export default class GraphInput extends Component {
           <p> <b> To provide edges, provide tails of all edges in "Starting Vertices" entry, and heads of all edges in "Ending Vertices" entry, separated by space </b> </p> 
           <p> <b> In the weights entry, provide space separated weights corresponding to the edges you entered </b> </p>
           <p> <b> Finally provide the source and sink</b></p>
+          {console.log(`GraphInput called`)}
           <form onSubmit={this.handleSubmit}>
             <input type="text"
                 name="vertexCount"

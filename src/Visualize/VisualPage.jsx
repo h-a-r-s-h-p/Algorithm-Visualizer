@@ -9,31 +9,37 @@ export default class EdmondsKarp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vertexCount: null,
-      edgeCount: null,
-      startingVertices: null,
-      endingVertices: null,
-      weights: null,
-      source: null,
-      sink: null,
+      graph: {
+        vertexCount: null,
+        edgeCount: null,
+        startingVertices: null,
+        endingVertices: null,
+        weights: null,
+        source: null,
+        sink: null,
+      },
+      reverseEdgesHidden: true,
       isClicked: false
     };
-    console.log("inside constructor\n");
+    // console.log("inside constructor\n");
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.handleChangeVisualization = this.handleChangeVisualization.bind(this);
   }
 
-  handleChange(vertexCount, edgeCount, startingVertices, endingVertices, weights, source, sink, isClicked) {
+  handleChangeInput(graph, isClicked) {
     this.setState(prevState => {
       return {
-        vertexCount: vertexCount,
-        edgeCount: edgeCount,
-        startingVertices: startingVertices,
-        endingVertices: endingVertices,
-        weights: weights,
-        source: source,
-        sink: sink,
+        graph: graph,
         isClicked: isClicked
+      }
+    })
+  }
+
+  handleChangeVisualization(reverseEdgesHidden) {
+    this.setState(prevState => {
+      return {
+        reverseEdgesHidden: reverseEdgesHidden
       }
     })
   }
@@ -42,37 +48,36 @@ export default class EdmondsKarp extends Component {
     return (
       <>
         <h1>{this.props.algorithm}</h1>
-        <GraphInput func={this.handleChange} />
+        <GraphInput func={this.handleChangeInput} />
         <div className="container">
           <div className="visual">
             {(() => {
-                if (this.state.isClicked){
-                    return (
-                      <div>
-                        <PlotGraph graph = {this.state}/>  
-                        <div className="control-bar">
-                          <button className="buttonstart"  onClick={HandleActions(this.state.vertexCount, 
-                                                                                  this.state.edgeCount, 
-                                                                                  this.state.startingVertices, 
-                                                                                  this.state.endingVertices,
-                                                                                  this.state.weights,
-                                                                                  this.state.source,
-                                                                                  this.state.sink)} >Start Visualization</button><br />
-                          <button className="buttonresume" >Resume</button>
-                          <button className="buttonpause" >Pause</button>
-                          <button className="buttonreset" >Reset</button>
-                        </div>
-                        
-                      </div>
-                    )
-                }
-                
-                return null;
-              })()}
+
+               console.log(`reverseEdgesHidden = ${this.state.reverseEdgesHidden}`);
+               console.log(`isClicked = ${this.state.isClicked}`) ;
+               console.log(`graph.vertexCount= ${this.state.graph.vertexCount}`) 
+               console.log(`graph.edgeCount = ${this.state.graph.edgeCount}`) 
+               console.log(`graph.startingVert = ${this.state.graph.startingVertices}`) 
+               console.log(`endingVertices = ${this.state.graph.endingVertices}`) 
+               console.log(`weights = ${this.state.graph.weights}`) 
+               console.log(`source = ${this.state.graph.source}`) 
+               console.log(`sink = ${this.state.graph.sink}`) 
+               console.log(`props = ${this.props.algorithm}`)
+              if (this.state.isClicked) {
+                return (
+                  <div>
+                    <PlotGraph plotGraphProps={this.state} />
+                    <HandleActions graph={this.state.graph} func={this.handleChangeVisualization} />
+                  </div>
+                )
+              }
+
+              return null;
+            })()}
           </div>
 
           <div className="pseudocode">
-            {this.state.isClicked? <EdmondsKarpPseudo /> :''}
+            {this.state.isClicked ? <EdmondsKarpPseudo /> : ''}
           </div>
 
         </div>
