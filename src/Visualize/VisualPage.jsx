@@ -31,7 +31,8 @@ export default class EdmondsKarp extends Component {
     this.setState(prevState => {
       return {
         graph: graph,
-        isClicked: isClicked
+        isClicked: isClicked,
+        reverseEdgesHidden: true
       }
     })
   }

@@ -20,11 +20,41 @@ export default function PlotGraph(props) {
   var source = graph.source;
   var sink = graph.sink;
 
+  var xPos = 0;
   var nodesArray = [];
-  for (var i = 0; i < vertexCount; i++) {
-    nodesArray[i] = {
-      id: i,
-      label: i.toString(),
+  for (var i = 1; i < vertexCount; i++) {
+    if(i%2===1){
+      xPos++;
+      nodesArray[i] = {
+        id: i,
+        label: i.toString(),
+        y: 0,
+        x: xPos
+      }
+    }
+    else{
+      nodesArray[i] = {
+        id : i,
+        label: i.toString(),
+        y: 2,
+        x: xPos
+      }
+    }
+  }
+
+  nodesArray[0]={
+    id: 0,
+    label: "0",
+    y: 1,
+    x: 0
+  }
+
+  if(vertexCount%2===0){
+    nodesArray[vertexCount-1]={
+      id : vertexCount-1,
+      label: (vertexCount-1).toString(),
+      y: 1,
+      x: xPos
     }
   }
 
