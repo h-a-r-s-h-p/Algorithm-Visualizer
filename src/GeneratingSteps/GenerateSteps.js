@@ -35,12 +35,12 @@ class Graph{
         // console.table(this.adjList);
 
 
-        // for(var key in this.adjList){
-        //     console.log(`adjList[${key}] :`)
-        //     for( i=0;i<this.adjList[key].length;i++){
-        //         console.log(`[${this.adjList[key][i].vertex},${this.adjList[key][i].weight}] `);
-        //     }
-        // }
+        for(var key in this.adjList){
+            console.log(`adjList[${key}] :`)
+            for( i=0;i<this.adjList[key].length;i++){
+                console.log(`[${this.adjList[key][i].vertex},${this.adjList[key][i].weight}] `);
+            }
+        }
     }
 
     createObject1(endingVertex, weight){
@@ -66,12 +66,12 @@ class Graph{
         while(queue.length!==0){
             if(flag===1) break;
             var curr = queue[0];
-            // console.log("curr = "+ curr);
+            console.log("curr = "+ curr);
             var step = [];
             step.push(curr);
             queue.shift();
             var adjacentNodes = this.adjList[curr];
-            // console.log("adjacentNodes = "+ adjacentNodes);
+            console.log("adjacentNodes = "+ adjacentNodes);
             for(i=0; i<adjacentNodes.length; i++){
                 if(adjacentNodes[i].weight===0) continue;
                 if(adjacentNodes[i].vertex===this.sink){
@@ -85,10 +85,10 @@ class Graph{
             }
             this.allSteps[ allStepsIndex++ ]=step;
         }
-        
-        // for(i=0;i<this.numberOfVertices;i++){
-        //     console.log(this.allSteps[i]);
-        // }
+        console.log(`steps generated: `)
+        for(i=0;i<this.numberOfVertices;i++){
+            console.log(this.allSteps[i]);
+        }
         return this.allSteps;
     }
 
