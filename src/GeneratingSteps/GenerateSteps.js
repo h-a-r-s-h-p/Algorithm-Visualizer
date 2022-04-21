@@ -66,7 +66,7 @@ class Graph{
         while(queue.length!==0){
             if(flag===1) break;
             var curr = queue[0];
-            console.log("curr = "+ curr);
+            // console.log("curr = "+ curr);
             var step = [];
             step.push(curr);
             queue.shift();
