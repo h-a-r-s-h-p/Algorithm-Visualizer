@@ -13,7 +13,7 @@ export default class GraphInput extends Component {
       source: null,
       sink: null
     };
-    console.log("inside GraphInput constructor\n");
+    // console.log("inside GraphInput constructor\n");
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,7 +45,23 @@ export default class GraphInput extends Component {
     simplifiedState.weights = this.state.weights.split(" ");
     simplifiedState.source = parseInt(this.state.source);
     simplifiedState.sink = parseInt(this.state.sink);
-    this.props.func(simplifiedState, true);
+
+    var nodesColor = []
+    var edgesColor = []
+    for (var i = 0; i < simplifiedState.vertexCount; i++) {
+        nodesColor.push('#D2E5FF');
+    }
+    nodesColor[simplifiedState.source]='green';
+    nodesColor[simplifiedState.sink]='red';
+    for (i = 0; i < simplifiedState.edgeCount; i++) {
+        edgesColor.push('#848484');
+    }
+
+    var dynamicState = {
+        nodesColor: nodesColor,
+        edgesColor: edgesColor
+    }
+    this.props.func(simplifiedState, dynamicState, true);
     // return (<PlotGraph value={this.state.data} />);
 
   }
@@ -57,7 +73,7 @@ export default class GraphInput extends Component {
           <p> <b> To provide edges, provide tails of all edges in "Starting Vertices" entry, and heads of all edges in "Ending Vertices" entry, separated by space </b> </p> 
           <p> <b> In the weights entry, provide space separated weights corresponding to the edges you entered </b> </p>
           <p> <b> Finally provide the source and sink</b></p>
-          {console.log(`GraphInput called`)}
+          {/* {console.log(`GraphInput called`)} */}
           <form onSubmit={this.handleSubmit}>
             <input type="text"
                 name="vertexCount"

@@ -16,6 +16,7 @@ export default function PlotGraph(props) {
 
     var endingVertices = graph.endingVertices;
 
+
     var weights = graph.weights;
     var source = graph.source;
     var sink = graph.sink;
@@ -29,7 +30,10 @@ export default function PlotGraph(props) {
                 id: i,
                 label: i.toString(),
                 y: 0,
-                x: xPos
+                x: xPos,
+                color:{
+                    background: props.plotGraphProps.dynamic.nodesColor[i]
+                }
             }
         }
         else {
@@ -37,7 +41,10 @@ export default function PlotGraph(props) {
                 id: i,
                 label: i.toString(),
                 y: 2,
-                x: xPos
+                x: xPos,
+                color:{
+                    background: props.plotGraphProps.dynamic.nodesColor[i]
+                }
             }
         }
     }
@@ -46,7 +53,10 @@ export default function PlotGraph(props) {
         id: 0,
         label: "0",
         y: 1,
-        x: 0
+        x: 0,
+        color:{
+            background:props.plotGraphProps.dynamic.nodesColor[0]
+        }
     }
 
     if (vertexCount % 2 === 0) {
@@ -54,7 +64,10 @@ export default function PlotGraph(props) {
             id: vertexCount - 1,
             label: (vertexCount - 1).toString(),
             y: 1,
-            x: xPos
+            x: xPos,
+            color:{
+                background: props.plotGraphProps.dynamic.nodesColor[vertexCount-1]
+            }
         }
     }
 
@@ -73,7 +86,7 @@ export default function PlotGraph(props) {
             label: "0/" + weights[j],
             font: {
                 align: "top"
-            }
+            },
         };
     }
 
@@ -98,10 +111,6 @@ export default function PlotGraph(props) {
         }
     }
 
-    if (props.plotGraphProps.reverseEdgesHidden === false) {
-        console.log(`The reverse edges should also be plotted`)
-    }
-
     var nodes = new DataSet(nodesArray);
     edges = new DataSet(edges);
 
@@ -111,18 +120,6 @@ export default function PlotGraph(props) {
     };
 
     const options = {}
-
-    var sourceNode = nodes.get(source);
-    sourceNode.color = {
-        background: 'green'
-    }
-
-    var sinkNode = nodes.get(sink);
-    sinkNode.color = {
-        background: 'red'
-    }
-    nodes.update(sourceNode);
-    nodes.update(sinkNode);
 
     useEffect(
         () => {
