@@ -1,6 +1,6 @@
 import React from 'react'
 import "./EdmondsKarpPseudo.css"
-import CommonCode from './CommondCode'
+import CommonCode from './CommonCode'
 
 function EdmondsKarpPseudo() {
   return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class CommondCode extends Component {
+export class CommonCode extends Component {
   render() {
     return (
       <div>CommonCode</div>
@@ -8,4 +8,4 @@ export class CommondCode extends Component {
   }
 }
 
-export default CommondCode
+export default CommonCode

@@ -5,7 +5,7 @@ import GraphInput from '../GraphInput/GraphInput';
 import EdmondsKarpPseudo from '../PseudoCode/EdmondsKarpPseudo';
 import HandleActions from '../Actions/HandleActions'
 
-export default class EdmondsKarp extends Component {
+export default class VisualPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +21,7 @@ export default class EdmondsKarp extends Component {
             dynamic: {
                 nodesColor: [],
                 edgesColor: [],
+                edgesLabel: []
             },
             reverseEdgesHidden: true,
             isClicked: false
