@@ -1,9 +1,11 @@
 import React from 'react'
 import "./EdmondsKarpPseudo.css"
+import CommonCode from './CommondCode'
 
 function EdmondsKarpPseudo() {
   return (
     <div>
+        <CommonCode/>
         <h4>Algorithm: </h4>
         <div className="pseudocode">
             <p id={1}>{"1. Construct the residual graph"}</p>
