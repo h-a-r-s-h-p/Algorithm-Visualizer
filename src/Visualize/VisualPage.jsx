@@ -72,7 +72,7 @@ export default class VisualPage extends Component {
                                 return (
                                     <div>
                                         <PlotGraph plotGraphProps={this.state} />
-                                        <HandleActions currState={this.state} func1={this.handleChangeReverseEdges} func2={this.handleChangeVisualization} />
+                                        <HandleActions algorithm={this.props.algorithm} currState={this.state} func1={this.handleChangeReverseEdges} func2={this.handleChangeVisualization} />
                                     </div>
                                 )
                             }

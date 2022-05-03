@@ -96,6 +96,21 @@ class Graph {
 
     }
 
+    dfs(currNode, visited){
+        console.log( `currNode = ${currNode}`)
+        this.allSteps.bfsdfs.push(currNode)
+        visited[currNode]=true
+        var neighbours= this.adjList[currNode]
+        for(var i=0;i<neighbours.length;i++){
+            if(neighbours[i].weight!==0 && visited[neighbours[i].vertex]===false){
+                console.log(`check2`)
+                this.dfs(neighbours[i].vertex,visited)
+                this.allSteps.bfsdfs.push(currNode)
+            }
+        }
+
+    }
+
 }
 
 export default Graph;
