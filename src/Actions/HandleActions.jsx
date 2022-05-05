@@ -18,11 +18,14 @@ export class HandleActions extends Component {
 
 
         for (var i = this.state.searchIndex1; i < bfsDfs.length; i++) {
+            // console.log(`step = ${bfsDfs[i]}`)
             updatedColors.nodesColor[bfsDfs[i][0]] = 'blue';
+            await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
             func2(updatedColors);
             for (var j = this.state.searchIndex2; j < bfsDfs[i].length; j++) {
+                console.log(`vertex = ${bfsDfs[i][j]}`)
                 if (bfsDfs[i][j] === currState.graph.sink) {
-                    updatedColors.nodesColor[bfsDfs[i][j]] = 'yellow';
+                    updatedColors.nodesColor[bfsDfs[i][j]] = 'pink';
                     await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
                     func2(updatedColors);
                 }
@@ -42,6 +45,7 @@ export class HandleActions extends Component {
 
     async SearchDfs(currState, func2, bfsDfs, updateColors){
         var time = 5;
+        await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
         for(var i=this.state.dfsIndex;i<bfsDfs.length;i++){
             updateColors.nodesColor[bfsDfs[i]]='blue'
             func2(updateColors)
@@ -71,7 +75,6 @@ export class HandleActions extends Component {
         await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
         func1(false);
 
-        await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
         var graph = new getSteps(currState.graph);
         graph.constructAdjList();
         if(this.props.algorithm ==="EdmondsKarp"){

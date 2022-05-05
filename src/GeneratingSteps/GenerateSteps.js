@@ -85,6 +85,7 @@ class Graph {
                     step.push(adjacentNodes[i].vertex);
                 }
             }
+            // console.log(`bfs step = ${step}`)
             this.allSteps.bfsdfs.push(step);
 
         }

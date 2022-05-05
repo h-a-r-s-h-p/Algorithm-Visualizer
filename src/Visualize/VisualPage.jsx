@@ -4,6 +4,7 @@ import PlotGraph from '../PlotGraph/PlotGraph';
 import GraphInput from '../GraphInput/GraphInput';
 import EdmondsKarpPseudo from '../PseudoCode/EdmondsKarpPseudo';
 import HandleActions from '../Actions/HandleActions'
+import FordFulkerson from '../PseudoCode/FordFulkerson';
 
 export default class VisualPage extends Component {
     constructor(props) {
@@ -82,7 +83,17 @@ export default class VisualPage extends Component {
                     </div>
 
                     <div className="pseudocode">
-                        {this.state.isClicked ? <EdmondsKarpPseudo /> : ''}
+                        {(() => {
+                            if(this.state.isClicked){
+                                console.log(`algorithm = ${this.props.algorithm}`)
+                                if(this.props.algorithm==="EdmondsKarp"){
+                                    return <EdmondsKarpPseudo/>
+                                }
+                                else{
+                                    return <FordFulkerson/>
+                                }
+                            }
+                        })()}
                     </div>
 
                 </div>
