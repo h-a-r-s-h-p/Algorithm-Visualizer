@@ -1,25 +1,26 @@
 class Graph {
     constructor(input) {
-        this.numberOfVertices = input.vertexCount;
-        this.numberOfEdges = input.edgeCount;
-        this.startingVertices = input.startingVertices.map(str => {
+        this.numberOfVertices = input.graph.vertexCount;
+        this.numberOfEdges = input.graph.edgeCount;
+        this.startingVertices = input.graph.startingVertices.map(str => {
             return parseInt(str);
         });
         // console.log("startingVertices inside generate steps = "+ this.startingVertices);
-        this.endingVertices = input.endingVertices.map(str => {
+        this.endingVertices = input.graph.endingVertices.map(str => {
             return parseInt(str);
         });
         // console.log("endingVertices inside generate steps = "+ this.endingVertices);
-        this.weight = input.weights.map(str => {
+        this.weight = input.graph.weights.map(str => {
             return parseInt(str);
         });
-        this.source = input.source;
-        this.sink = input.sink;
+        this.source = input.graph.source;
+        this.sink = input.graph.sink;
         this.adjList = {};
         this.allSteps = {
             bfsdfs: [],
             path: []
         };
+        this.capacities = input.dynamic
     }
 
     constructAdjList() {
@@ -27,13 +28,18 @@ class Graph {
             this.adjList[i] = [];
         }
         for (i = 0; i < this.numberOfEdges; i++) {
-            var obj1 = this.createObject1(this.endingVertices[i], this.weight[i]);
-            var obj2 = this.createObject1(this.startingVertices[i], 0);
+            var obj1 = this.createObject1(this.endingVertices[i], this.capacities.edgesCapacity[this.startingVertices[i]][this.endingVertices[i]]-this.capacities.edgesFlow[this.startingVertices[i]][this.endingVertices[i]]);
+            var obj2 = this.createObject1(this.startingVertices[i], this.capacities.edgesCapacity[this.endingVertices[i]][this.startingVertices[i]]-this.capacities.edgesFlow[this.endingVertices[i]][this.startingVertices[i]]);
             // console.log(`object = ${obj.vertex} ${obj.weight}`);
             this.adjList[this.startingVertices[i]].push(obj1);
             this.adjList[this.endingVertices[i]].push(obj2);
         }
-
+        for(i=0;i<this.numberOfVertices;i++){
+            console.log(`vertex = ${i}`)
+            for(var j=0;j<this.adjList[i].length;j++){
+                console.log(this.adjList[i][j].vertex, this.adjList[i][j].weight)
+            }
+        }
     }
 
     createObject1(endingVertex, weight) {
@@ -94,7 +100,8 @@ class Graph {
             this.allSteps.path.push(currVertex);
             currVertex = parent[currVertex];
         }
-
+        if(flag===1) return 1;
+        else return 0
     }
 
     dfs(currNode){

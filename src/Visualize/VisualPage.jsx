@@ -23,7 +23,9 @@ export default class VisualPage extends Component {
                 nodesColor: [],
                 edgesColor: [],
                 edgesCapacity: [],
-                edgesFlow: []
+                edgesFlow: [],
+                bottleneck: null,
+                maxFlow: 0
             },
             reverseEdgesHidden: true,
             isClicked: false
@@ -74,6 +76,12 @@ export default class VisualPage extends Component {
                                 return (
                                     <div>
                                         <PlotGraph plotGraphProps={this.state} />
+
+                                        <div className="bottleneck">
+                                            <h3>Bottleneck Capacity = {this.state.dynamic.bottleneck}</h3>
+                                            <h3> Max Flow= {this.state.dynamic.maxFlow}</h3>
+                                        </div>
+                                            
                                         <HandleActions algorithm={this.props.algorithm} currState={this.state} func1={this.handleChangeReverseEdges} func2={this.handleChangeVisualization} />
                                     </div>
                                 )

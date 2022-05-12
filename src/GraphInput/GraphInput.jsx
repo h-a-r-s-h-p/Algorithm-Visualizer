@@ -40,9 +40,15 @@ export default class GraphInput extends Component {
     }
     simplifiedState.vertexCount = parseInt(this.state.vertexCount);
     simplifiedState.edgeCount = parseInt(this.state.edgeCount);
-    simplifiedState.startingVertices = this.state.startingVertices.split(" ");
-    simplifiedState.endingVertices = this.state.endingVertices.split(" ");
-    simplifiedState.weights = this.state.weights.split(" ");
+    simplifiedState.startingVertices = this.state.startingVertices.split(" ").map(function(item) {
+                                            return parseInt(item, 10);
+                                        });
+    simplifiedState.endingVertices = this.state.endingVertices.split(" ").map(function(item) {
+                                        return parseInt(item, 10);
+                                    });
+    simplifiedState.weights = this.state.weights.split(" ").map(function(item) {
+                                return parseInt(item, 10);
+                            });
     simplifiedState.source = parseInt(this.state.source);
     simplifiedState.sink = parseInt(this.state.sink);
 
@@ -72,7 +78,8 @@ export default class GraphInput extends Component {
         nodesColor: nodesColor,
         edgesColor: edgesColor,
         edgesCapacity: edgesCapacity,
-        edgesFlow: edgesFlow
+        edgesFlow: edgesFlow,
+        maxFlow: 0
     }
     this.props.func(simplifiedState, dynamicState, true);
     // return (<PlotGraph value={this.state.data} />);
