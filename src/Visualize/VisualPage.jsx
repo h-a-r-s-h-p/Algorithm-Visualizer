@@ -22,7 +22,8 @@ export default class VisualPage extends Component {
             dynamic: {
                 nodesColor: [],
                 edgesColor: [],
-                edgesLabel: []
+                edgesCapacity: [],
+                edgesFlow: []
             },
             reverseEdgesHidden: true,
             isClicked: false
@@ -85,7 +86,6 @@ export default class VisualPage extends Component {
                     <div className="pseudocode">
                         {(() => {
                             if(this.state.isClicked){
-                                console.log(`algorithm = ${this.props.algorithm}`)
                                 if(this.props.algorithm==="EdmondsKarp"){
                                     return <EdmondsKarpPseudo/>
                                 }

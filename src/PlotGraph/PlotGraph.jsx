@@ -21,6 +21,12 @@ export default function PlotGraph(props) {
     var source = graph.source;
     var sink = graph.sink;
 
+    var nodesColor= props.plotGraphProps.dynamic.nodesColor
+
+    var edgesFlow = props.plotGraphProps.dynamic.edgesFlow
+    var edgesCapacity = props.plotGraphProps.dynamic.edgesCapacity
+    var edgesColor = props.plotGraphProps.dynamic.edgesColor
+
     var xPos = 0;
     var nodesArray = [];
     for (var i = 1; i < vertexCount; i++) {
@@ -32,7 +38,7 @@ export default function PlotGraph(props) {
                 y: 0,
                 x: xPos,
                 color:{
-                    background: props.plotGraphProps.dynamic.nodesColor[i]
+                    background: nodesColor[i]
                 }
             }
         }
@@ -43,7 +49,7 @@ export default function PlotGraph(props) {
                 y: 2,
                 x: xPos,
                 color:{
-                    background: props.plotGraphProps.dynamic.nodesColor[i]
+                    background: nodesColor[i]
                 }
             }
         }
@@ -55,7 +61,7 @@ export default function PlotGraph(props) {
         y: 1,
         x: 0,
         color:{
-            background:props.plotGraphProps.dynamic.nodesColor[0]
+            background:nodesColor[0]
         }
     }
 
@@ -66,7 +72,7 @@ export default function PlotGraph(props) {
             y: 1,
             x: xPos,
             color:{
-                background: props.plotGraphProps.dynamic.nodesColor[vertexCount-1]
+                background:nodesColor[vertexCount-1]
             }
         }
     }
@@ -83,10 +89,12 @@ export default function PlotGraph(props) {
                     type: "arrow",
                 },
             },
-            label: "0/" + weights[j],
+            label: edgesFlow[startingVertices[j]][endingVertices[j]].toString()+"/"+edgesCapacity[startingVertices[j]][endingVertices[j]].toString(),
             font: {
-                align: "top"
+                align: "top",
+                color: edgesColor[startingVertices[j]][endingVertices[j]]
             },
+            color: edgesColor[startingVertices[j]][endingVertices[j]]
         };
     }
 
@@ -101,12 +109,13 @@ export default function PlotGraph(props) {
                     type: "arrow",
                 },
             },
-            label: "0/0",
+            label: edgesFlow[endingVertices[k]][startingVertices[k]].toString()+"/"+edgesCapacity[endingVertices[k]][startingVertices[k]].toString(),
             font: {
-                align: "top"
+                align: "top",
+                color: edgesColor[endingVertices[k]][startingVertices[k]]
             },
             hidden: props.plotGraphProps.reverseEdgesHidden,
-            color: "black",
+            color: edgesColor[endingVertices[k]][startingVertices[k]],
             group: "reverse"
         }
     }

@@ -12,18 +12,13 @@ export class HandleActions extends Component {
         }
     }
 
-    async SearchBfs(currState, func2, bfsDfs, updatedColors) {
-        var time = 5;
-        // console.table( `currState inside start action: ${currState}`);
-
+    async SearchBfs(currState, func2, bfsDfs, updatedColors, path, time) {
 
         for (var i = this.state.searchIndex1; i < bfsDfs.length; i++) {
-            // console.log(`step = ${bfsDfs[i]}`)
             updatedColors.nodesColor[bfsDfs[i][0]] = 'blue';
             await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
             func2(updatedColors);
             for (var j = this.state.searchIndex2; j < bfsDfs[i].length; j++) {
-                console.log(`vertex = ${bfsDfs[i][j]}`)
                 if (bfsDfs[i][j] === currState.graph.sink) {
                     updatedColors.nodesColor[bfsDfs[i][j]] = 'pink';
                     await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
@@ -40,11 +35,12 @@ export class HandleActions extends Component {
                 updatedColors.nodesColor[bfsDfs[i][j]] = '#D2E5FF';
             }
         }
-
+        await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
+        this.ColorPath(func2, path, updatedColors, time)
     }
 
-    async SearchDfs(currState, func2, bfsDfs, updateColors){
-        var time = 5;
+    async SearchDfs(currState, func2, bfsDfs, updateColors, path, time){
+        
         await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
         for(var i=this.state.dfsIndex;i<bfsDfs.length;i++){
             updateColors.nodesColor[bfsDfs[i]]='blue'
@@ -67,12 +63,33 @@ export class HandleActions extends Component {
             }
             updateColors.nodesColor[bfsDfs[i]]='green'
         }
+        await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
+        for (var j = 0; j < currState.graph.vertexCount; j++) {
+            updateColors.nodesColor[j] = '#D2E5FF';
+        }
+        this.ColorPath(func2, path, updateColors, time)
     }
 
+    async UpdateEdges(func2, path, updateColors, time){
+        var bottleneck=1000;
+        for(var i=path.length-1;i>0;i--){
+            
+        }
+    }
 
-    async Start(currState, func1, func2, execute) {
-        console.log(`start button clicked`)
-        await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
+    async ColorPath(func2, path, updatedColors, time){
+        for(var i=0;i<path.length;i++){
+            updatedColors.nodesColor[path[i]]='pink'
+        }
+
+        func2(updatedColors)
+        await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
+    }
+
+    async Start(currState, func1, func2, execute) {   
+        
+        var time = 5;
+        await new Promise((resolve, reject) => setTimeout(resolve, time * 1000));
         func1(false);
 
         var graph = new getSteps(currState.graph);
@@ -81,38 +98,26 @@ export class HandleActions extends Component {
             graph.bfs();
         }
         else{
-            var visited=[]
-            for(var i=0;i<currState.graph.vertexCount;i++){
-                visited[i]=false
-            }
-            graph.dfs(currState.graph.source, visited)
+            graph.dfs(currState.graph.source)
         }
         var bfsDfs = graph.allSteps.bfsdfs;
-        console.log(`bfsDfs = ${bfsDfs}`)
         var path = graph.allSteps.path;
-
+        console.log(`path= ${path}`)
         var updatedColors = currState.dynamic;
         if(this.props.algorithm==="EdmondsKarp"){
-            this.SearchBfs(currState, func2, bfsDfs, updatedColors);
+            this.SearchBfs(currState, func2, bfsDfs, updatedColors, path, time);
         }
         else{
-            this.SearchDfs(currState, func2, bfsDfs, updatedColors);
+            this.SearchDfs(currState, func2, bfsDfs, updatedColors, path, time);
         }
-    
-        // console.log(bfsDfs);
     }
+
+
     render() {
         return (
             <div className="control-bar">
                 <button className="buttonstart" onClick={() => this.Start(this.props.currState, this.props.func1, this.props.func2, true)} >Start Visualization</button><br />
 
-                <button className="buttonresume" onClick={() => this.Start(this.props.currState, this.props.func1, this.props.func2, true)} >Resume</button>
-                <button className="buttonpause" onClick={() =>  this.Start(this.props.currState, this.props.func1, this.props.func2, false)  }>Pause</button>
-                <button className="buttonreset" onClick={() => {
-                    this.setState(prevState => ({ searchIndex1: 0 }))
-                    this.setState(prevState => ({ searchIndex2: 1 }))
-                    this.Start(this.props.currState, this.props.func1, this.props.func2, false) 
-                }}>Reset</button>
             </div>
         )
     }

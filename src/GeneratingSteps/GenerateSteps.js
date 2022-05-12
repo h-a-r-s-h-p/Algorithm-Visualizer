@@ -97,15 +97,29 @@ class Graph {
 
     }
 
-    dfs(currNode, visited){
-        console.log( `currNode = ${currNode}`)
+    dfs(currNode){
+        var parent = []
+        var visited=[]
+        for (var i = 0; i < this.numberOfVertices; i++) {
+            parent[i] = -1;
+            visited[i]=false
+        }
+
+        this.dfshelper(currNode, visited, parent);
+        var currVertex = this.sink;
+        while (currVertex !== -1) {
+            this.allSteps.path.push(currVertex);
+            currVertex = parent[currVertex];
+        }
+    }
+    dfshelper(currNode, visited, parent){
         this.allSteps.bfsdfs.push(currNode)
         visited[currNode]=true
         var neighbours= this.adjList[currNode]
         for(var i=0;i<neighbours.length;i++){
             if(neighbours[i].weight!==0 && visited[neighbours[i].vertex]===false){
-                console.log(`check2`)
-                this.dfs(neighbours[i].vertex,visited)
+                parent[neighbours[i].vertex]=currNode;
+                this.dfshelper(neighbours[i].vertex,visited, parent)
                 this.allSteps.bfsdfs.push(currNode)
             }
         }

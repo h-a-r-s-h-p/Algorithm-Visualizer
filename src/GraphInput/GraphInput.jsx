@@ -48,18 +48,31 @@ export default class GraphInput extends Component {
 
     var nodesColor = []
     var edgesColor = []
+    var edgesCapacity = []
+    var edgesFlow=[]
     for (var i = 0; i < simplifiedState.vertexCount; i++) {
         nodesColor.push('#D2E5FF');
+        edgesColor[i]=new Array(simplifiedState.vertexCount)
+        edgesCapacity[i]=new Array(simplifiedState.vertexCount)
+        edgesFlow[i]=new Array(simplifiedState.vertexCount)
     }
     nodesColor[simplifiedState.source]='green';
     nodesColor[simplifiedState.sink]='red';
+
     for (i = 0; i < simplifiedState.edgeCount; i++) {
-        edgesColor.push('#848484');
+        edgesColor[simplifiedState.startingVertices[i]][simplifiedState.endingVertices[i]]='#1a8cff';
+        edgesColor[simplifiedState.endingVertices[i]][simplifiedState.startingVertices[i]]='black';
+        edgesCapacity[simplifiedState.startingVertices[i]][simplifiedState.endingVertices[i]]=simplifiedState.weights[i]
+        edgesFlow[simplifiedState.startingVertices[i]][simplifiedState.endingVertices[i]]=0
+        edgesCapacity[simplifiedState.endingVertices[i]][simplifiedState.startingVertices[i]]=0;
+        edgesFlow[simplifiedState.endingVertices[i]][simplifiedState.startingVertices[i]]=0
     }
 
     var dynamicState = {
         nodesColor: nodesColor,
-        edgesColor: edgesColor
+        edgesColor: edgesColor,
+        edgesCapacity: edgesCapacity,
+        edgesFlow: edgesFlow
     }
     this.props.func(simplifiedState, dynamicState, true);
     // return (<PlotGraph value={this.state.data} />);
